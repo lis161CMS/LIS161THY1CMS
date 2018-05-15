@@ -3,25 +3,25 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUsersTable extends Migration
+class CreateNavigationtypesTable extends Migration
 {
     /**
      * Run the migrations.
-     * @table users
+     * @table navigationTypes
      *
      * @return void
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('navigationTypes', function (Blueprint $table) {
             $table->engine = 'InnoDB';
 
-            $table->index(["role_id"], 'fk_users_roles_idx');
+            $table->index(["user_id"], 'fk_navigationTypes_users1_idx');
             $table->nullableTimestamps();
 
 
-            $table->foreign('role_id', 'fk_users_roles_idx')
-                ->references('id')->on('roles')
+            $table->foreign('user_id', 'fk_navigationTypes_users1_idx')
+                ->references('id')->on('users')
                 ->onDelete('no action')
                 ->onUpdate('no action');
         });
@@ -34,6 +34,6 @@ class CreateUsersTable extends Migration
      */
      public function down()
      {
-       Schema::dropIfExists('users');
+       Schema::dropIfExists('navigationTypes');
      }
 }
