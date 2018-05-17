@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration {
 			$table->string('middleName')->nullable();
 			$table->string('lastName')->nullable();
 			$table->string('email');
+			$table->string('password')->nullable();
 			$table->timestamps();
 			$table->softDeletes();
 			$table->integer('role_id')->index('fk_users_roles_idx');
