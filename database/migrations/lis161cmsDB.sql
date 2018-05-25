@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.0
+-- version 4.7.7
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: May 25, 2018 at 07:10 AM
--- Server version: 10.1.31-MariaDB
--- PHP Version: 7.2.4
+-- Host: 127.0.0.1
+-- Generation Time: May 25, 2018 at 09:37 AM
+-- Server version: 10.1.30-MariaDB
+-- PHP Version: 7.2.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `lis161CMS`
+-- Database: `lis161cms`
 --
 
 -- --------------------------------------------------------
@@ -222,7 +222,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `firstName`, `middleName`, `lastName`, `email`, `password`, `created_at`, `updated_at`, `deleted_at`, `role_id`, `userPhoto`, `remember_token`) VALUES
-(3, 'Ma. Nicole', 'Reduta', 'Tacuboy', 'tma.nicole@gmail.com', '$2y$10$9OyvCJhpdrFJwW/iM5RbGec0ZLWGNI.Gyw7OBvhVqbtuu0JEmTcG6', '2018-05-24 20:08:18', '2018-05-24 20:08:18', NULL, 1, NULL, NULL);
+(3, 'Ma. Nicole', 'Reduta', 'Tacuboy', 'tma.nicole@gmail.com', '$2y$10$9OyvCJhpdrFJwW/iM5RbGec0ZLWGNI.Gyw7OBvhVqbtuu0JEmTcG6', '2018-05-24 20:08:18', '2018-05-24 20:08:18', NULL, 1, NULL, NULL),
+(4, 'Jeanne Denyse', 'Viudez', 'Torres', 'jvtorres2@up.edu.ph', '$2y$10$Cl6kglTiwh8d2j9wxpRh4ehCW8bktVO4qRn7oTPhuBvcwvctGR9LO', '2018-05-24 23:31:24', '2018-05-24 23:31:24', NULL, 1, NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -363,7 +364,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
