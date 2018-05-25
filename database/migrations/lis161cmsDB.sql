@@ -1,238 +1,427 @@
--- MySQL Workbench Forward Engineering
+-- phpMyAdmin SQL Dump
+-- version 4.8.0
+-- https://www.phpmyadmin.net/
+--
+-- Host: localhost
+-- Generation Time: May 25, 2018 at 06:20 AM
+-- Server version: 10.1.31-MariaDB
+-- PHP Version: 7.2.4
 
-SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
-SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
-
--- -----------------------------------------------------
--- Schema lis161CMS
--- -----------------------------------------------------
-
--- -----------------------------------------------------
--- Schema lis161CMS
--- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `lis161CMS` DEFAULT CHARACTER SET utf8 ;
-USE `lis161CMS` ;
-
--- -----------------------------------------------------
--- Table `lis161CMS`.`roles`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `lis161CMS`.`roles` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `role` VARCHAR(255) NOT NULL,
-  `roleShortName` VARCHAR(45) NULL,
-  `created_at` TIMESTAMP NULL DEFAULT NULL,
-  `updated_at` TIMESTAMP NULL DEFAULT NULL,
-  `deleted_at` TIMESTAMP NULL DEFAULT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
 
 
--- -----------------------------------------------------
--- Table `lis161CMS`.`users`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `lis161CMS`.`users` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `firstName` VARCHAR(255) NULL,
-  `middleName` VARCHAR(255) NULL,
-  `lastName` VARCHAR(255) NULL,
-  `email` VARCHAR(255) NOT NULL,
-  `created_at` TIMESTAMP NULL DEFAULT NULL,
-  `updated_at` TIMESTAMP NULL DEFAULT NULL,
-  `deleted_at` TIMESTAMP NULL DEFAULT NULL,
-  `role_id` INT NOT NULL,
-  `userPhoto` VARCHAR(255) NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_users_roles_idx` (`role_id` ASC),
-  CONSTRAINT `fk_users_roles`
-    FOREIGN KEY (`role_id`)
-    REFERENCES `lis161CMS`.`roles` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
+--
+-- Database: `lis161CMS`
+--
 
--- -----------------------------------------------------
--- Table `lis161CMS`.`navigationTypes`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `lis161CMS`.`navigationTypes` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `navigationType` VARCHAR(255) NULL,
-  `created_at` TIMESTAMP NULL DEFAULT NULL,
-  `updated_at` TIMESTAMP NULL DEFAULT NULL,
-  `deleted_at` TIMESTAMP NULL DEFAULT NULL,
-  `user_id` INT NOT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_navigationTypes_users1_idx` (`user_id` ASC),
-  CONSTRAINT `fk_navigationTypes_users1`
-    FOREIGN KEY (`user_id`)
-    REFERENCES `lis161CMS`.`users` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+-- --------------------------------------------------------
 
+--
+-- Table structure for table `contents`
+--
 
--- -----------------------------------------------------
--- Table `lis161CMS`.`navigations`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `lis161CMS`.`navigations` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `navigationName` VARCHAR(45) NOT NULL,
-  `navigationLink` VARCHAR(45) NOT NULL,
-  `created_at` TIMESTAMP NULL DEFAULT NULL,
-  `updated_at` TIMESTAMP NULL DEFAULT NULL,
-  `deleted_at` TIMESTAMP NULL DEFAULT NULL,
-  `role_id` INT NOT NULL,
-  `navigationType_id` INT NOT NULL,
-  `user_id` INT NOT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_navigations_roles1_idx` (`role_id` ASC),
-  INDEX `fk_navigations_navigationTypes1_idx` (`navigationType_id` ASC),
-  INDEX `fk_navigations_users1_idx` (`user_id` ASC),
-  CONSTRAINT `fk_navigations_roles1`
-    FOREIGN KEY (`role_id`)
-    REFERENCES `lis161CMS`.`roles` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_navigations_navigationTypes1`
-    FOREIGN KEY (`navigationType_id`)
-    REFERENCES `lis161CMS`.`navigationTypes` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_navigations_users1`
-    FOREIGN KEY (`user_id`)
-    REFERENCES `lis161CMS`.`users` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+CREATE TABLE `contents` (
+  `id` int(11) NOT NULL,
+  `contentTitle` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `contentType_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- --------------------------------------------------------
 
--- -----------------------------------------------------
--- Table `lis161CMS`.`contentTypes`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `lis161CMS`.`contentTypes` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `contentType` VARCHAR(255) NOT NULL,
-  `contentTypeDesc` TEXT NULL,
-  `created_at` TIMESTAMP NULL DEFAULT NULL,
-  `updated_at` TIMESTAMP NULL DEFAULT NULL,
-  `deleted_at` TIMESTAMP NULL DEFAULT NULL,
-  `user_id` INT NOT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_contentTypes_users1_idx` (`user_id` ASC),
-  CONSTRAINT `fk_contentTypes_users1`
-    FOREIGN KEY (`user_id`)
-    REFERENCES `lis161CMS`.`users` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+--
+-- Table structure for table `contenttypes`
+--
 
+CREATE TABLE `contenttypes` (
+  `id` int(11) NOT NULL,
+  `contentType` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `contentTypeDesc` text COLLATE utf8mb4_unicode_ci,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -----------------------------------------------------
--- Table `lis161CMS`.`contents`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `lis161CMS`.`contents` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `contentTitle` TEXT NOT NULL,
-  `created_at` TIMESTAMP NULL DEFAULT NULL,
-  `updated_at` TIMESTAMP NULL DEFAULT NULL,
-  `deleted_at` TIMESTAMP NULL DEFAULT NULL,
-  `contentType_id` INT NOT NULL,
-  `user_id` INT NOT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_content_contentTypes1_idx` (`contentType_id` ASC),
-  INDEX `fk_content_users1_idx` (`user_id` ASC),
-  CONSTRAINT `fk_content_contentTypes1`
-    FOREIGN KEY (`contentType_id`)
-    REFERENCES `lis161CMS`.`contentTypes` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_content_users1`
-    FOREIGN KEY (`user_id`)
-    REFERENCES `lis161CMS`.`users` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+-- --------------------------------------------------------
 
+--
+-- Table structure for table `migrations`
+--
 
--- -----------------------------------------------------
--- Table `lis161CMS`.`revisions`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `lis161CMS`.`revisions` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `content` TEXT NOT NULL,
-  `revisionNo` VARCHAR(255) NOT NULL,
-  `created_at` TIMESTAMP NULL DEFAULT NULL,
-  `updated_at` TIMESTAMP NULL DEFAULT NULL,
-  `deleted_at` TIMESTAMP NULL DEFAULT NULL,
-  `created_at_copy1` TIMESTAMP NULL DEFAULT NULL,
-  `updated_at_copy1` TIMESTAMP NULL DEFAULT NULL,
-  `deleted_at_copy1` TIMESTAMP NULL DEFAULT NULL,
-  `imageLink` VARCHAR(255) NULL,
-  `content_id` INT NOT NULL,
-  `user_id` INT NOT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_revisions_contents1_idx` (`content_id` ASC),
-  INDEX `fk_revisions_users1_idx` (`user_id` ASC),
-  CONSTRAINT `fk_revisions_contents1`
-    FOREIGN KEY (`content_id`)
-    REFERENCES `lis161CMS`.`contents` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_revisions_users1`
-    FOREIGN KEY (`user_id`)
-    REFERENCES `lis161CMS`.`users` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+CREATE TABLE `migrations` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `batch` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `migrations`
+--
 
--- -----------------------------------------------------
--- Table `lis161CMS`.`navigationcontents`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `lis161CMS`.`navigationcontents` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `created_at` TIMESTAMP NULL DEFAULT NULL,
-  `updated_at` TIMESTAMP NULL DEFAULT NULL,
-  `deleted_at` TIMESTAMP NULL DEFAULT NULL,
-  `navigation_id` INT NOT NULL,
-  `content_id` INT NOT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_navigationcontents_navigations1_idx` (`navigation_id` ASC),
-  INDEX `fk_navigationcontents_contents1_idx` (`content_id` ASC),
-  CONSTRAINT `fk_navigationcontents_navigations1`
-    FOREIGN KEY (`navigation_id`)
-    REFERENCES `lis161CMS`.`navigations` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_navigationcontents_contents1`
-    FOREIGN KEY (`content_id`)
-    REFERENCES `lis161CMS`.`contents` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
+(1, '2018_05_17_035304_create_contents_table', 1),
+(2, '2018_05_17_035304_create_contenttypes_table', 1),
+(3, '2018_05_17_035304_create_navigationcontents_table', 1),
+(4, '2018_05_17_035304_create_navigations_table', 1),
+(5, '2018_05_17_035304_create_navigationtypes_table', 1),
+(6, '2018_05_17_035304_create_permissions_table', 1),
+(7, '2018_05_17_035304_create_revisions_table', 1),
+(8, '2018_05_17_035304_create_roles_table', 1),
+(9, '2018_05_17_035304_create_users_table', 1),
+(10, '2018_05_17_035307_add_foreign_keys_to_contents_table', 1),
+(11, '2018_05_17_035307_add_foreign_keys_to_contenttypes_table', 1),
+(12, '2018_05_17_035307_add_foreign_keys_to_navigationcontents_table', 1),
+(13, '2018_05_17_035307_add_foreign_keys_to_navigations_table', 1),
+(14, '2018_05_17_035307_add_foreign_keys_to_navigationtypes_table', 1),
+(15, '2018_05_17_035307_add_foreign_keys_to_permissions_table', 1),
+(16, '2018_05_17_035307_add_foreign_keys_to_revisions_table', 1),
+(17, '2018_05_17_035307_add_foreign_keys_to_users_table', 1);
 
+-- --------------------------------------------------------
 
--- -----------------------------------------------------
--- Table `lis161CMS`.`permissions`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `lis161CMS`.`permissions` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `permission` VARCHAR(45) NOT NULL,
-  `created_at` TIMESTAMP NULL DEFAULT NULL,
-  `updated_at` TIMESTAMP NULL DEFAULT NULL,
-  `deleted_at` TIMESTAMP NULL DEFAULT NULL,
-  `role_id` INT NOT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_permissions_roles1_idx` (`role_id` ASC),
-  CONSTRAINT `fk_permissions_roles1`
-    FOREIGN KEY (`role_id`)
-    REFERENCES `lis161CMS`.`roles` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+--
+-- Table structure for table `navigationcontents`
+--
 
+CREATE TABLE `navigationcontents` (
+  `id` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `navigation_id` int(11) NOT NULL,
+  `content_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `navigations`
+--
+
+CREATE TABLE `navigations` (
+  `id` int(11) NOT NULL,
+  `navigationName` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `navigationLink` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `role_id` int(11) NOT NULL,
+  `navigationType_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `navigationtypes`
+--
+
+CREATE TABLE `navigationtypes` (
+  `id` int(11) NOT NULL,
+  `navigationType` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `permissions`
+--
+
+CREATE TABLE `permissions` (
+  `id` int(11) NOT NULL,
+  `permission` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `role_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `revisions`
+--
+
+CREATE TABLE `revisions` (
+  `id` int(11) NOT NULL,
+  `content` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `revisionNo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `created_at_copy1` datetime DEFAULT NULL,
+  `updated_at_copy1` datetime DEFAULT NULL,
+  `deleted_at_copy1` datetime DEFAULT NULL,
+  `imageLink` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `content_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `roles`
+--
+
+CREATE TABLE `roles` (
+  `id` int(11) NOT NULL,
+  `role` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `roleShortName` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `roles`
+--
+
+INSERT INTO `roles` (`id`, `role`, `roleShortName`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'Administrator', 'admin', NULL, NULL, NULL),
+(2, 'User', 'usr', NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `firstName` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `middleName` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `lastName` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `role_id` int(11) NOT NULL,
+  `userPhoto` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `firstName`, `middleName`, `lastName`, `email`, `password`, `created_at`, `updated_at`, `deleted_at`, `role_id`, `userPhoto`) VALUES
+(3, 'Ma. Nicole', 'Reduta', 'Tacuboy', 'tma.nicole@gmail.com', '$2y$10$9OyvCJhpdrFJwW/iM5RbGec0ZLWGNI.Gyw7OBvhVqbtuu0JEmTcG6', '2018-05-24 20:08:18', '2018-05-24 20:08:18', NULL, 1, NULL);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `contents`
+--
+ALTER TABLE `contents`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_content_contentTypes1_idx` (`contentType_id`),
+  ADD KEY `fk_content_users1_idx` (`user_id`);
+
+--
+-- Indexes for table `contenttypes`
+--
+ALTER TABLE `contenttypes`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_contentTypes_users1_idx` (`user_id`);
+
+--
+-- Indexes for table `migrations`
+--
+ALTER TABLE `migrations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `navigationcontents`
+--
+ALTER TABLE `navigationcontents`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_navigationcontents_navigations1_idx` (`navigation_id`),
+  ADD KEY `fk_navigationcontents_contents1_idx` (`content_id`);
+
+--
+-- Indexes for table `navigations`
+--
+ALTER TABLE `navigations`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_navigations_roles1_idx` (`role_id`),
+  ADD KEY `fk_navigations_navigationTypes1_idx` (`navigationType_id`),
+  ADD KEY `fk_navigations_users1_idx` (`user_id`);
+
+--
+-- Indexes for table `navigationtypes`
+--
+ALTER TABLE `navigationtypes`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_navigationTypes_users1_idx` (`user_id`);
+
+--
+-- Indexes for table `permissions`
+--
+ALTER TABLE `permissions`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_permissions_roles1_idx` (`role_id`);
+
+--
+-- Indexes for table `revisions`
+--
+ALTER TABLE `revisions`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_revisions_contents1_idx` (`content_id`),
+  ADD KEY `fk_revisions_users1_idx` (`user_id`);
+
+--
+-- Indexes for table `roles`
+--
+ALTER TABLE `roles`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_users_roles_idx` (`role_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `contents`
+--
+ALTER TABLE `contents`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `contenttypes`
+--
+ALTER TABLE `contenttypes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `migrations`
+--
+ALTER TABLE `migrations`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
+-- AUTO_INCREMENT for table `navigationcontents`
+--
+ALTER TABLE `navigationcontents`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `navigations`
+--
+ALTER TABLE `navigations`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `navigationtypes`
+--
+ALTER TABLE `navigationtypes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `permissions`
+--
+ALTER TABLE `permissions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `revisions`
+--
+ALTER TABLE `revisions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `roles`
+--
+ALTER TABLE `roles`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `contents`
+--
+ALTER TABLE `contents`
+  ADD CONSTRAINT `fk_content_contentTypes1` FOREIGN KEY (`contentType_id`) REFERENCES `contenttypes` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_content_users1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `contenttypes`
+--
+ALTER TABLE `contenttypes`
+  ADD CONSTRAINT `fk_contentTypes_users1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `navigationcontents`
+--
+ALTER TABLE `navigationcontents`
+  ADD CONSTRAINT `fk_navigationcontents_contents1` FOREIGN KEY (`content_id`) REFERENCES `contents` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_navigationcontents_navigations1` FOREIGN KEY (`navigation_id`) REFERENCES `navigations` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `navigations`
+--
+ALTER TABLE `navigations`
+  ADD CONSTRAINT `fk_navigations_navigationTypes1` FOREIGN KEY (`navigationType_id`) REFERENCES `navigationtypes` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_navigations_roles1` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_navigations_users1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `navigationtypes`
+--
+ALTER TABLE `navigationtypes`
+  ADD CONSTRAINT `fk_navigationTypes_users1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `permissions`
+--
+ALTER TABLE `permissions`
+  ADD CONSTRAINT `fk_permissions_roles1` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `revisions`
+--
+ALTER TABLE `revisions`
+  ADD CONSTRAINT `fk_revisions_contents1` FOREIGN KEY (`content_id`) REFERENCES `contents` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_revisions_users1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `users`
+--
+ALTER TABLE `users`
+  ADD CONSTRAINT `fk_users_roles` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
