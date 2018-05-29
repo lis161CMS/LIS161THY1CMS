@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use App\Navigation;
 
 class NavigationController extends Controller
 {
@@ -36,8 +36,7 @@ class NavigationController extends Controller
     public function store(Request $request)
     {
         $nav = [
-            'navigationName' => $request->input('navigationName'),
-            'navigationLink' => $request->input('navigationLink'),
+            'navigationName' => $request->all(),
         ];
 
         $saveNav = Navigation::create($nav);
