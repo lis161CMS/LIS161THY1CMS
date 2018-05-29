@@ -35,8 +35,12 @@ class NavigationController extends Controller
      */
     public function store(Request $request)
     {
-        foreach ($navigationName as $navigationName) 
-        DB::insert('INSERT INTO navigation (navigationName) VALUES (?,?)', array($navigationName,Input::get('navigationName')));
+        $nav = $request->input('navigationName');
+        foreach($nav as $name){
+           $navi = new Navigation([
+            'navigationName' => $name]);
+           $navi->save();
+       }
     }
 
     /**
