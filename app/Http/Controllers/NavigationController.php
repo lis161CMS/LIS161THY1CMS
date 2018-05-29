@@ -24,7 +24,7 @@ class NavigationController extends Controller
      */
     public function create()
     {
-        //
+        return view('navigation.create');
     }
 
     /**
@@ -35,7 +35,16 @@ class NavigationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,
+            ['navigationType' => 'required',
+            'user' => 'required'
+        ]);
+        $navtype = new navigationType([
+            'navigationType' => $request->get('navigationType'),
+            'user_id' => $request->get('user')
+        ]);
+        $navtype->save();
+        return redirect()->route('navtype.create')->with('success');
     }
 
     /**

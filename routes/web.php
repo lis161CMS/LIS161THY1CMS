@@ -16,6 +16,9 @@ Route::get('/', function () {
 });
 
 Route::resource('navtype', 'NavTypeController');
+
+Route::resource('navigation', 'NavigationController');
+
 Auth::routes();
 
 /**Route::get('/home', 'HomeController@index')->name('home');*/
