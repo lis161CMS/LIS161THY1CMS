@@ -35,17 +35,8 @@ class NavigationController extends Controller
      */
     public function store(Request $request)
     {
-        $nav = [
-            'navigationName' => $request->all(),
-        ];
-
-        $saveNav = Navigation::create($nav);
-
-        if($saveNav):
-            return redirect(route('navigation.create'));
-        else:
-            return redirect()->back()->withInput();
-        endif;
+        foreach ($navigationName as $navigationName) 
+        DB::insert('INSERT INTO navigation (navigationName) VALUES (?,?)', array($navigationName,Input::get('navigationName')));
     }
 
     /**
