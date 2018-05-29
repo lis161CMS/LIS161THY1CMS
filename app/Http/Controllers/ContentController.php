@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Content;
+use Session;
+use Illuminate\Database\Eloquent;
 
 class ContentController extends Controller
 {
@@ -14,7 +17,6 @@ class ContentController extends Controller
      */
     public function index()
     {
-        //
     }
 
     /**
