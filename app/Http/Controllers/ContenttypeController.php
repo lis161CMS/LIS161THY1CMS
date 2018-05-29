@@ -3,12 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Content;
-use Session;
-use Illuminate\Database\Eloquent;
+use App\Contenttype;
 
-class ContentController extends Controller
+class ContenttypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +14,8 @@ class ContentController extends Controller
      */
     public function index()
     {
-        $content = Content::all();
-        return view('contents.index',compact('content'));
+         $contenttypes = Contenttype::all();
+        return view('welcome', compact('contenttypes'));
     }
 
     /**
@@ -28,7 +25,7 @@ class ContentController extends Controller
      */
     public function create()
     {
-        //
+        return view('Contenttype.create');
     }
 
     /**
@@ -39,7 +36,12 @@ class ContentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+         $contenttypes = new Contenttype;
+        $contenttypes->title = request('contentType');
+        $contenttypes->author = request('contentTypeDesc');
+        $contenttypes->save();
+        return redirect('/');
+    }
     }
 
     /**
@@ -61,7 +63,10 @@ class ContentController extends Controller
      */
     public function edit($id)
     {
-        //
+        $contentypes = Contenttype::find($id);
+        
+        
+        return view('contenttypes.edit', compact('contenttypes'));
     }
 
     /**
@@ -73,7 +78,12 @@ class ContentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+          $contenttypes = Contenttype::find($id);
+        $contenttypes->title = request('contentType');
+        $contenttypes->author = request('contentDesc');
+        $book->save();
+        
+        return redirect('/');
     }
 
     /**
@@ -84,6 +94,9 @@ class ContentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $contenttypes = Contenttype::find($id);
+        $contenttypes->delete();
+        
+        return redirect('/');
     }
 }
