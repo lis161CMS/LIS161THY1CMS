@@ -21,7 +21,7 @@
 	}
 
 	if(IsSelected('navigationName', 'Home')){
-		<input type="hidden" name="navigationLink[]" value="Home">
+		<input type="checkbox" name="navigationName[]" value="Link1">Link1</input>;
 	}
 ?>
 @endsection
