@@ -14,7 +14,7 @@ class NavTypeController extends Controller
      */
     public function index()
     {
-        //
+        return view('navtype.create');
     }
 
     /**
