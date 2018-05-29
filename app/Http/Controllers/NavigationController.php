@@ -35,16 +35,18 @@ class NavigationController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,
-            ['navigationType' => 'required',
-            'user' => 'required'
-        ]);
-        $navtype = new navigationType([
-            'navigationType' => $request->get('navigationType'),
-            'user_id' => $request->get('user')
-        ]);
-        $navtype->save();
-        return redirect()->route('navtype.create')->with('success');
+        $nav = [
+            'navigationName' => $request->input('navigationName'),
+            'navigationLink' => $request->input('navigationLink'),
+        ];
+
+        $saveNav = Navigation::create($nav);
+
+        if($saveNav):
+            return redirect(route('navigation.create'));
+        else:
+            return redirect()->back()->withInput();
+        endif;
     }
 
     /**
