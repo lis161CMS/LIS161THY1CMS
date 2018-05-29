@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <h3>All content <a class="btn btn-primary" href="/admin/content/create">Add new content</a></h3>
+    <h3>All content <a class="btn btn-primary" href="{{ URL::to('admin/content/create') }}">Add new content</a></h3>
 
     <table class="table">
         <thead>

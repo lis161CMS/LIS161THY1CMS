@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <h3>Create new content</h3>
-    <form action="/admin/content" method="post">
+    <form action="{!!URL::to('admin/content')!!}"  method="post">
         {{ csrf_field() }}        
         
         <div class="form-group">
