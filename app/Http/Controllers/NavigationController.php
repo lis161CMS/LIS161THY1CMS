@@ -35,11 +35,12 @@ class NavigationController extends Controller
      */
     public function store(Request $request)
     {
-        $nav = [
-            'navigationName' => $request->all(),
-        ];
-
-        $saveNav = Navigation::create($nav);
+        $nav = $request->get('navigationName')
+            for($i = 0; $i <count($nav); i++){
+                $saveNav = Navigation::create(
+                    navigationName => $nav[$i]);
+            }
+                    
 
         if($saveNav):
             return redirect(route('navigation.create'));
