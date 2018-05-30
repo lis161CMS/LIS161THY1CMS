@@ -13,4 +13,8 @@ class Content extends Model
     protected $fillable = [
      'contentTitle','contentType_id','user_id'
     ];
+
+    public function revisions() {
+        return $this->hasMany('App\Revision');
+    }
 }
