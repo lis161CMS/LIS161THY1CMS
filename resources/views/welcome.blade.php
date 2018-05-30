@@ -12,15 +12,17 @@
 
         <!-- Styles -->
         <style>
-            html, body {
-                background-color: #fff;
+            html, body{
                 color: #636b6f;
                 font-family: 'Raleway', sans-serif;
                 font-weight: 100;
                 height: 100vh;
                 margin: 0;
-            }
-
+                background-image: url('https://c.pxhere.com/photos/fa/e7/norway_hovden_winter_snow_mountain_landscape_natural-661856.jpg!d');
+                background-repeat: no-repeat;
+                background-position: center;
+                background-size: 100%;
+              }
             .full-height {
                 height: 100vh;
             }
