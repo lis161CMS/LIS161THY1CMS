@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Content;
+use App\Revision;
 use Session;
 use Illuminate\Database\Eloquent;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class ContentController extends Controller
 {
@@ -28,7 +31,7 @@ class ContentController extends Controller
      */
     public function create()
     {
-        //
+        return view('content.create');
     }
 
     /**
@@ -39,7 +42,35 @@ class ContentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $time = Carbon::now()->toDateTimeString();
+        $id = \Auth::user()->id;
+        $newContent = [
+            'contentTitle' => $request->input('contentTitle'),
+            'contentType_id' => 1,
+            'user_id' => $id,
+            'created_at' => $time,
+            'updated_at' => $time
+        ];
+
+        ##$saveContent = Content::create($newContent);
+        $contentid = DB::table('contents')->insertGetId($newContent);
+
+        $newPost = [
+            'content' => $request->input('content'),
+            'revisionNo' => 1,
+            'content_id' => $contentid,
+            'user_id' => $id,
+            'created_at' => $time,
+            'updated_at' => $time
+        ];
+
+        $savePost = DB::table('revisions')->insertGetId($newPost);
+
+        if($savePost):
+            return redirect('/home');
+        else:
+            return redirect()->back()->withInput();
+        endif;
     }
 
     /**

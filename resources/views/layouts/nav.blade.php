@@ -19,13 +19,6 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <!-- Styles -->
-    <style>
-        .foo {
-            height: 100%;
-            width: auto;
-        }
-    </style>
 </head>
 <body>
     <div id="app">
@@ -51,6 +44,13 @@
                             <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
                             <li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>
                         @else
+                            @if(Auth::check() && Auth::user()->role_id == 1)
+                                <li><a class="nav-link" href="{{ url('/adminhome') }}">{{ __('Home') }}</a></li>
+                                <li><a class="nav-link" href="{{ url('/users') }}">{{ __('User Management') }}</a></li>
+                                <li><a class="nav-link" href="{{ url('/navigation/create') }}">{{ __('Edit User Navigation') }}</a></li>
+                            @else
+                                <li><a class="nav-link" href="{{ url('/home') }}">{{ __('Home') }}</a></li>
+                            @endif
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->firstName }} <span class="caret"></span>

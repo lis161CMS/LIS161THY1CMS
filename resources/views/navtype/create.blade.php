@@ -1,4 +1,4 @@
-@extends('layouts.App')
+@extends('layouts.nav')
 
 @section('content')
 <form method="post" action="{{url('navtype')}}">

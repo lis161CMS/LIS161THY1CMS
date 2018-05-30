@@ -15,13 +15,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('users', 'UserController');
-
-Route::resource('navtype', 'NavTypeController');
-
-Route::post('navigation.navupdate', 'NavigationController@navupdate');
-Route::resource('navigation','NavigationController');
-
 Auth::routes();
 
 ##Route::get('/home', 'HomeController@index')->name('home');
@@ -29,11 +22,16 @@ Auth::routes();
 Route::group([ 'middleware' => ['auth', 'admin']], function()
 {
 	Route::get('adminhome', 'HomeController@admin');
+  Route::resource('users', 'UserController');
+  Route::resource('navtype', 'NavTypeController');
+  Route::post('navigation.navupdate', 'NavigationController@navupdate');
+  Route::resource('navigation','NavigationController');
 });
 
 Route::group([ 'middleware' => ['auth', 'user']], function()
 {
 	Route::get('home', 'HomeController@user');
+  Route::resource('newpost', 'ContentController');
 });
 
 

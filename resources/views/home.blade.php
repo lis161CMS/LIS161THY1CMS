@@ -4,19 +4,19 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
+
+          @foreach($revisions as $rev)
             <div class="card">
-                <div class="card-header">Dashboard</div>
+                <div class="card-header">{{ $rev->contents['contentTitle'] }}</div>
 
                 <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    You are logged in as User!
+                    {{ $rev->content }}
                 </div>
-            </div>
+            </div><br/><br/>
+          @endforeach
+
+
+
         </div>
     </div>
 </div>

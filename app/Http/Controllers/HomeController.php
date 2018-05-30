@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Content;
+use App\Revision;
 
 class HomeController extends Controller
 {
@@ -31,6 +33,9 @@ class HomeController extends Controller
     }
 
     public function user(Request $req){
-      	return view('/home');
+          ##$revisions = Revision::all();
+          ##return view('/home', compact('revisions'));
+          $contents = Content::all();
+          return view('/home', compact('contents'));
     }
 }

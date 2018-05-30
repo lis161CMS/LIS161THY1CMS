@@ -71,8 +71,16 @@
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
+<<<<<<< HEAD
                         <a href="{{ url('/home') }}">Home</a>
                         <a href="{{ url('/new') }}">New Post</a>
+=======
+                        @if(Auth::check() && Auth::user()->role_id == 1)
+    	                      <a href="{{ url('/adminhome') }}">Home</a>
+                        @else
+                            <a href="{{ url('/home') }}">Home</a>
+                        @endif
+>>>>>>> 350fc171604609d5b3787084202f955b5f5ecb83
                     @else
                         <a href="{{ route('login') }}">Login</a>
                         <a href="{{ route('register') }}">Register</a>

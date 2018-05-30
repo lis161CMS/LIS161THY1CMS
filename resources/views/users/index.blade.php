@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.nav')
 
 @section('content')
 
@@ -26,9 +26,9 @@
                     <td>{{ $u->lastName }}</td>
                     <td>{{ $u->email }}</td>
                     <td>{{ $u->created_at->format('F d, Y h:ia') }}</td>
-                        @if($u->role_id == 2)
+                        @if($u->role_id == 1)
                           <td>Admin</td>
-                        @elseif ($u->role_id == 1)
+                        @elseif ($u->role_id == 2)
                           <td>User</td>
                         @endif
                     <td>
