@@ -80,7 +80,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                  LIS 161 CMS
                 </div>
 
                 <div class="links">
