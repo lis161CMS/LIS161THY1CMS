@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 30, 2018 at 11:54 AM
+-- Generation Time: May 30, 2018 at 03:19 PM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.2
 
@@ -30,13 +30,13 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `contents` (
   `id` int(11) NOT NULL,
-  `contentTitle` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `contentTitle` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `contentType_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -46,13 +46,13 @@ CREATE TABLE `contents` (
 
 CREATE TABLE `contenttypes` (
   `id` int(11) NOT NULL,
-  `contentType` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `contentTypeDesc` text COLLATE utf8mb4_unicode_ci,
+  `contentType` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `contentTypeDesc` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `user_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -62,9 +62,9 @@ CREATE TABLE `contenttypes` (
 
 CREATE TABLE `migrations` (
   `id` int(10) UNSIGNED NOT NULL,
-  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `migration` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `migrations`
@@ -102,7 +102,7 @@ CREATE TABLE `navigationcontents` (
   `deleted_at` timestamp NULL DEFAULT NULL,
   `navigation_id` int(11) NOT NULL,
   `content_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -112,8 +112,8 @@ CREATE TABLE `navigationcontents` (
 
 CREATE TABLE `navigations` (
   `id` int(11) NOT NULL,
-  `navigationName` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `navigationLink` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `navigationName` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `navigationLink` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `navactivated` tinyint(4) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -121,16 +121,16 @@ CREATE TABLE `navigations` (
   `role_id` int(11) NOT NULL,
   `navigationType_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `navigations`
 --
 
 INSERT INTO `navigations` (`id`, `navigationName`, `navigationLink`, `navactivated`, `created_at`, `updated_at`, `deleted_at`, `role_id`, `navigationType_id`, `user_id`) VALUES
-(1, 'name1', 'link1', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 2, 1, 2),
-(2, 'name2', 'link2', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 2, 1, 2),
-(3, 'name3', 'link3', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 2, 1, 2),
+(1, 'View Content', 'viewcontent', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 2, 1, 0),
+(2, 'Add Content', 'addcontent', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 2, 1, 0),
+(3, 'View Own Content', 'usercontent', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 2, 1, 0),
 (4, 'name4', 'link4', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 2, 1, 2),
 (5, 'name5', 'link5', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 2, 1, 2),
 (6, 'name6', 'link6', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 2, 1, 2),
@@ -147,12 +147,12 @@ INSERT INTO `navigations` (`id`, `navigationName`, `navigationLink`, `navactivat
 
 CREATE TABLE `navigationtypes` (
   `id` int(11) NOT NULL,
-  `navigationType` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `navigationType` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `user_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -162,12 +162,12 @@ CREATE TABLE `navigationtypes` (
 
 CREATE TABLE `permissions` (
   `id` int(11) NOT NULL,
-  `permission` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `permission` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `role_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -177,18 +177,18 @@ CREATE TABLE `permissions` (
 
 CREATE TABLE `revisions` (
   `id` int(11) NOT NULL,
-  `content` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `revisionNo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `revisionNo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at_copy1` datetime DEFAULT NULL,
   `updated_at_copy1` datetime DEFAULT NULL,
   `deleted_at_copy1` datetime DEFAULT NULL,
-  `imageLink` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `imageLink` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `content_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -198,12 +198,12 @@ CREATE TABLE `revisions` (
 
 CREATE TABLE `roles` (
   `id` int(11) NOT NULL,
-  `role` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `roleShortName` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `role` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `roleShortName` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `roles`
@@ -221,18 +221,18 @@ INSERT INTO `roles` (`id`, `role`, `roleShortName`, `created_at`, `updated_at`, 
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
-  `firstName` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `middleName` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `lastName` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `firstName` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `middleName` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `lastName` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `role_id` int(11) NOT NULL,
-  `userPhoto` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `remember_token` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `userPhoto` mediumblob,
+  `remember_token` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
@@ -240,8 +240,11 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `firstName`, `middleName`, `lastName`, `email`, `password`, `created_at`, `updated_at`, `deleted_at`, `role_id`, `userPhoto`, `remember_token`) VALUES
 (3, 'Ma. Nicole', 'Reduta', 'Tacuboy', 'tma.nicole@gmail.com', '$2y$10$9OyvCJhpdrFJwW/iM5RbGec0ZLWGNI.Gyw7OBvhVqbtuu0JEmTcG6', '2018-05-24 20:08:18', '2018-05-24 20:08:18', NULL, 1, NULL, NULL),
-(4, 'Jeanne Denyse', 'Viudez', 'Torres', 'jvtorres2@up.edu.ph', '$2y$10$Cl6kglTiwh8d2j9wxpRh4ehCW8bktVO4qRn7oTPhuBvcwvctGR9LO', '2018-05-24 23:31:24', '2018-05-24 23:31:24', NULL, 1, NULL, NULL),
-(5, 'Winston', 'Sison', 'Isaac', 'marc@winstonisaac.com', '$2y$10$JV49qRP2imgpdBEeM1NLR.YW2ktKSDc/W.N0IE.btJUnlXhLk23hS', '2018-05-25 10:52:34', '2018-05-25 10:52:34', NULL, 1, NULL, 'llhLcgMjDmSJ96tukBmXT15OQIs4NwllZ7spPD0Im3OZXJtqNmlseeloqHvA');
+(4, 'Jeanne Denyse', 'Viudez', 'Torres', 'jvtorres2@up.edu.ph', '$2y$10$Cl6kglTiwh8d2j9wxpRh4ehCW8bktVO4qRn7oTPhuBvcwvctGR9LO', '2018-05-24 23:31:24', '2018-05-24 23:31:24', NULL, 1, NULL, '2GziP7foaTnOf3oMwHvvbNPj3oQpuiGHFoMw737OftnRDMUQgFJ53V2Ooefs'),
+(5, 'Winston', 'Sison', 'Isaac', 'marc@winstonisaac.com', '$2y$10$JV49qRP2imgpdBEeM1NLR.YW2ktKSDc/W.N0IE.btJUnlXhLk23hS', '2018-05-25 10:52:34', '2018-05-25 10:52:34', NULL, 1, NULL, 'llhLcgMjDmSJ96tukBmXT15OQIs4NwllZ7spPD0Im3OZXJtqNmlseeloqHvA'),
+(6, 'First', 'Middle', 'Last', 'email@email.com', '$2y$10$IJGwLghot/YigNBm1/MvfOWOPW1x5kJVGFwaet0j.8BgaIvOY9JEK', '2018-05-30 03:58:56', '2018-05-30 03:58:56', NULL, 1, NULL, 'ViBXBMscu71dRLubLJ0wKWZRNvynr83Y9Q9DbzQUWyytd3CAIwH63E5WQvxq'),
+(7, 'User', 'Middle', 'Last', 'email2@email.com', '$2y$10$0o3jMRckrhhrw1d9M9GP2.Z9ISPwVhfXeBSxR6/vFQ6lHQOCjkoQ6', '2018-05-30 04:30:55', '2018-05-30 04:30:55', NULL, 2, NULL, 'dOYNCpCWhKFnbytNEGdm044cXzl5mIrVFvWOkoYNSFGjkVtsdlRYska1ZvFk'),
+(8, 'Admin', 'Middle', 'Last', 'admin@email.com', '$2y$10$.B1VEDwcwr7N6xCcVSdaa.FxCfuU3AHsFW5GDLoA.6i6sTnF3vspu', '2018-05-30 04:38:04', '2018-05-30 04:38:04', NULL, 1, NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -382,7 +385,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Constraints for dumped tables
