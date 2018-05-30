@@ -10,7 +10,8 @@ class Content extends Model
     use SoftDeletes;
 
     protected $guarded = [];
-
+    protected $dates =['deleted_at'];
+    protected $table ='contents';
     public static function boot() {
         parent::boot();
 

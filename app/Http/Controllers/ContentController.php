@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Navigationtype;
+use App\Http\Controllers\Controller;
+use App\Content;
+use Session;
+use Illuminate\Database\Eloquent;
 
-class NavTypeController extends Controller
+class ContentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +17,8 @@ class NavTypeController extends Controller
      */
     public function index()
     {
-        return view('navtype.create');
+        $content = Content::all();
+        return view('contents.index',compact('content'));
     }
 
     /**
@@ -24,7 +28,7 @@ class NavTypeController extends Controller
      */
     public function create()
     {
-        return view('navtype.create');
+        //
     }
 
     /**
@@ -35,16 +39,7 @@ class NavTypeController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,
-            ['navigationType' => 'required',
-            'user' => 'required'
-        ]);
-        $navtype = new navigationType([
-            'navigationType' => $request->get('navigationType'),
-            'user_id' => $request->get('user')
-        ]);
-        $navtype->save();
-        return redirect()->route('navtype.create')->with('success');
+        //
     }
 
     /**

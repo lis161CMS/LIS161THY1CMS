@@ -15,6 +15,25 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::resource('navtype', 'NavTypeController');
+
+Route::resource('navigation', 'NavigationController');
+
+
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+##Route::get('/home', 'HomeController@index')->name('home');
+
+Route::group([ 'middleware' => ['auth', 'admin']], function()
+{
+	Route::get('adminhome', 'HomeController@admin');
+});
+
+Route::group([ 'middleware' => ['auth', 'user']], function()
+{
+	Route::get('home', 'HomeController@user');
+});
+
+
+/*Route::resource('/admin/content', 'Admin\ContentController')->middleware('auth');
+Route::post('/admin/content-reversions/{revision}', 'Admin\ContentReversionsController@store')->middleware('auth');*/

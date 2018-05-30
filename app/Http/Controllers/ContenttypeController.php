@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Navigationtype;
+use App\Contenttype;
 
-class NavTypeController extends Controller
+class ContenttypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,8 @@ class NavTypeController extends Controller
      */
     public function index()
     {
-        return view('navtype.create');
+         $contenttypes = Contenttype::all();
+        return view('welcome', compact('contenttypes'));
     }
 
     /**
@@ -24,7 +25,7 @@ class NavTypeController extends Controller
      */
     public function create()
     {
-        return view('navtype.create');
+        return view('Contenttype.create');
     }
 
     /**
@@ -35,16 +36,12 @@ class NavTypeController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,
-            ['navigationType' => 'required',
-            'user' => 'required'
-        ]);
-        $navtype = new navigationType([
-            'navigationType' => $request->get('navigationType'),
-            'user_id' => $request->get('user')
-        ]);
-        $navtype->save();
-        return redirect()->route('navtype.create')->with('success');
+         $contenttypes = new Contenttype;
+        $contenttypes->title = request('contentType');
+        $contenttypes->author = request('contentTypeDesc');
+        $contenttypes->save();
+        return redirect('/');
+    }
     }
 
     /**
@@ -66,7 +63,10 @@ class NavTypeController extends Controller
      */
     public function edit($id)
     {
-        //
+        $contentypes = Contenttype::find($id);
+        
+        
+        return view('contenttypes.edit', compact('contenttypes'));
     }
 
     /**
@@ -78,7 +78,12 @@ class NavTypeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+          $contenttypes = Contenttype::find($id);
+        $contenttypes->title = request('contentType');
+        $contenttypes->author = request('contentDesc');
+        $book->save();
+        
+        return redirect('/');
     }
 
     /**
@@ -89,6 +94,9 @@ class NavTypeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $contenttypes = Contenttype::find($id);
+        $contenttypes->delete();
+        
+        return redirect('/');
     }
 }
