@@ -35,7 +35,7 @@ class HomeController extends Controller
     public function user(Request $req){
           ##$revisions = Revision::all();
           ##return view('/home', compact('revisions'));
-          $contents = Content::all();
-          return view('/home', compact('contents'));
+          $revisions = Revision::all();
+          return view('/home', compact('revisions'));
     }
 }
