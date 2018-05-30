@@ -71,16 +71,11 @@
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
-<<<<<<< HEAD
-                        <a href="{{ url('/home') }}">Home</a>
-                        <a href="{{ url('/new') }}">New Post</a>
-=======
                         @if(Auth::check() && Auth::user()->role_id == 1)
     	                      <a href="{{ url('/adminhome') }}">Home</a>
                         @else
                             <a href="{{ url('/home') }}">Home</a>
                         @endif
->>>>>>> 350fc171604609d5b3787084202f955b5f5ecb83
                     @else
                         <a href="{{ route('login') }}">Login</a>
                         <a href="{{ route('register') }}">Register</a>
@@ -92,15 +87,7 @@
                 <div class="title m-b-md">
                   LIS 161 CMS
                 </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
-            </div>
+                Discover. Create. Contribute.
         </div>
     </body>
 </html>
