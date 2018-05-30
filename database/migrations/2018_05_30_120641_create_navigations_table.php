@@ -17,7 +17,7 @@ class CreateNavigationsTable extends Migration {
 			$table->integer('id', true);
 			$table->string('navigationName', 45);
 			$table->string('navigationLink', 45);
-			$table->tinyInteger('navactivated');
+			$table->boolean('navactivated');
 			$table->timestamps();
 			$table->softDeletes();
 			$table->integer('role_id')->index('fk_navigations_roles1_idx');

@@ -205,6 +205,14 @@ CREATE TABLE `roles` (
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `roles`
+--
+
+INSERT INTO `roles` (`id`, `role`, `roleShortName`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'Administrator', 'admin', NULL, NULL, NULL),
+(2, 'User', 'usr', NULL, NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -222,8 +230,18 @@ CREATE TABLE `users` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `role_id` int(11) NOT NULL,
-  `userPhoto` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `userPhoto` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `remember_token` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `firstName`, `middleName`, `lastName`, `email`, `password`, `created_at`, `updated_at`, `deleted_at`, `role_id`, `userPhoto`, `remember_token`) VALUES
+(3, 'Ma. Nicole', 'Reduta', 'Tacuboy', 'tma.nicole@gmail.com', '$2y$10$9OyvCJhpdrFJwW/iM5RbGec0ZLWGNI.Gyw7OBvhVqbtuu0JEmTcG6', '2018-05-24 20:08:18', '2018-05-24 20:08:18', NULL, 1, NULL, NULL),
+(4, 'Jeanne Denyse', 'Viudez', 'Torres', 'jvtorres2@up.edu.ph', '$2y$10$Cl6kglTiwh8d2j9wxpRh4ehCW8bktVO4qRn7oTPhuBvcwvctGR9LO', '2018-05-24 23:31:24', '2018-05-24 23:31:24', NULL, 1, NULL, NULL),
+(5, 'Winston', 'Sison', 'Isaac', 'marc@winstonisaac.com', '$2y$10$JV49qRP2imgpdBEeM1NLR.YW2ktKSDc/W.N0IE.btJUnlXhLk23hS', '2018-05-25 10:52:34', '2018-05-25 10:52:34', NULL, 1, NULL, 'llhLcgMjDmSJ96tukBmXT15OQIs4NwllZ7spPD0Im3OZXJtqNmlseeloqHvA');
 
 --
 -- Indexes for dumped tables
@@ -340,7 +358,7 @@ ALTER TABLE `navigations`
 -- AUTO_INCREMENT for table `navigationtypes`
 --
 ALTER TABLE `navigationtypes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `permissions`
@@ -358,13 +376,13 @@ ALTER TABLE `revisions`
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables

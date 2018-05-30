@@ -24,6 +24,7 @@ class CreateUsersTable extends Migration {
 			$table->softDeletes();
 			$table->integer('role_id')->index('fk_users_roles_idx');
 			$table->string('userPhoto')->nullable();
+			$table->string('remember_token')->nullable();
 		});
 	}
 
