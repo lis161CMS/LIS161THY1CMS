@@ -15,6 +15,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::resource('users', 'UserController');
+
 Route::resource('navtype', 'NavTypeController');
 
 Route::post('navigation.navupdate', 'NavigationController@navupdate');
