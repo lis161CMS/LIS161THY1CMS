@@ -14,7 +14,9 @@
                         </div>
                     @endif
 
-                    You are logged in as User!
+                    <div class=”title m-b-md”>
+                        Page inaccessible. User type ‘{{ $role }}’ required.
+                    </div>
                 </div>
             </div>
         </div>
