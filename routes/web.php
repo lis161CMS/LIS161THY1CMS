@@ -17,8 +17,8 @@ Route::get('/', function () {
 
 Route::resource('navtype', 'NavTypeController');
 
-Route::resource('navigation', 'NavigationController');
-
+Route::post('navigation.navupdate', 'NavigationController@navupdate');
+Route::resource('navigation','NavigationController');
 
 Auth::routes();
 
