@@ -32,10 +32,10 @@ class NavigationController extends Controller
 
     public function navupdate(Request $request)
     {
-        DB::table('navigations')->update(['navactivated' -> FALSE]);
+        DB::table('navigations')->update(['navactivated' => FALSE]);
         DB::table('navigations')
-            ->whereIn('id', $id)
-            ->update(['navactivated' -> TRUE]);
+            ->whereIn('id', $request)
+            ->update(['navactivated' => TRUE]);
 
         return redirect(route('navigation.create'));
     }
