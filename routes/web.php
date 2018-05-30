@@ -31,6 +31,7 @@ Route::group([ 'middleware' => ['auth', 'admin']], function()
 Route::group([ 'middleware' => ['auth', 'user']], function()
 {
 	Route::get('home', 'HomeController@user');
+  Route::resource('newpost', 'ContentController');
 });
 
 

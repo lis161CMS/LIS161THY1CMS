@@ -15,13 +15,13 @@
                     @endif
 
                     {{ Form::open(array('action' => 'NavigationController@navupdate')) }}
-					{{ csrf_field() }}
-					@foreach($navs as $nav)
-						{{ Form::checkbox($nav->navigationLink, $nav->id, $nav->navactivated) }} {{ $nav->navigationName }}<br/>
-					@endforeach
-					<br/>
-					{{ Form::submit() }}
-					{{ Form::close() }}
+										{{ csrf_field() }}
+										@foreach($navs as $nav)
+											{{ Form::checkbox($nav->navigationLink, $nav->id, $nav->navactivated) }} {{ $nav->navigationName }}<br/>
+										@endforeach
+										<br/>
+										{{ Form::submit() }}
+										{{ Form::close() }}
                 </div>
             </div>
         </div>
