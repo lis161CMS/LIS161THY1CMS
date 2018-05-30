@@ -30,13 +30,12 @@ class RegisterController extends Controller
      */
     ##protected $redirectTo = '/home';
 
-    protected function authenticated(Request $request, $user)
+    protected function redirectTo()
     {
-        if ( $user->role_id==1 ) {
-            return redirect('/adminhome');
+        if (auth()->user()->role_id == 1) {
+            return '/adminhome';
         }
-
-        return redirect('/home');
+        return '/home';
     }
 
     /**
