@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Navigation;
+use Illuminate\Support\Facades\DB;
 
 class NavigationController extends Controller
 {
@@ -24,7 +25,19 @@ class NavigationController extends Controller
      */
     public function create()
     {
-        return view('navigation.create');
+        $navs = DB::table('navigations')->where('role_id', '=', 2)->get();
+
+        return view('navigation.create', compact('navs'));
+    }
+
+    public function navupdate(Request $request)
+    {
+        DB::table('navigations')->update(['navactivated' -> FALSE]);
+        DB::table('navigations')
+            ->whereIn('id', $id)
+            ->update(['navactivated' -> TRUE]);
+
+        return redirect(route('navigation.create'));
     }
 
     /**
