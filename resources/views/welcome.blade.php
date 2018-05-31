@@ -9,20 +9,24 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
+
 
         <!-- Styles -->
         <style>
-            html, body{
-                color: #636b6f;
-                font-family: 'Raleway', sans-serif;
-                font-weight: 100;
+            html {
                 height: 100vh;
                 margin: 0;
-                background-image: url('https://c.pxhere.com/photos/fa/e7/norway_hovden_winter_snow_mountain_landscape_natural-661856.jpg!d');
+                background-image: url('https://farm5.static.flickr.com/4023/4412224015_dbe31a4ae4_b.jpg');
                 background-repeat: no-repeat;
-                background-position: center;
-                background-size: 100%;
+                background-position: 60% 50%;
+                background-size: cover;
               }
+            body {
+              color: #ffffff;
+              font-family: 'Raleway', sans-serif;
+              font-weight: 100;
+            }
             .full-height {
                 height: 100vh;
             }
@@ -62,16 +66,45 @@
             }
 
             .m-b-md {
-                margin-bottom: 30px;
+                margin-top: 200px;
+            }
+
+            .sidenav {
+                font-size: 18px;
+                font-family: 'Josefin Sans', sans-serif;
+                height: 100%;
+                width: 190px;
+                position: fixed;
+                z-index: 1;
+                top: 0px;
+                left: 10px;
+                background:#f6f6f6;
+                overflow-x: hidden;
+                padding: 120px 0;
+                border-right-style: solid;
+                border-color: #e3e3e3;
+                border-width: 1px;
+            }
+            .sidenav a,p {
+                padding: 10px 10px 0px 20px;
+                text-decoration: none;
+                font-size: 20px;
+                color: 	#740404;
+                display: block;
+            }
+
+            .sidenav a:hover {
+                color: #0c6509;
+            }
+            .co {
+              color: #636b6f;
             }
         </style>
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
+        <div class="sidenav">
             @if (Route::has('login'))
-                <div class="top-right links">
                     @auth
-
                         @if(Auth::check() && Auth::user()->role_id == 1)
                             <a href="{{ url('/users') }}">{{ __('User Management') }}</a>
                             <a href="{{ url('/permissions') }}">{{ __('Permissions') }}</a>
@@ -88,8 +121,10 @@
                         @endif
 
                     @else
-                        <a href="{{ route('login') }}">Login</a>
-                        <a href="{{ route('register') }}">Register</a>
+                        <p>Welcome to LIS 161 CMS!</p><br>
+                        <a href="{{ route('login') }}">Log-in</a><div class="co">&emsp;to your account <br>
+                        <br>&emsp;or</div> <br>
+                        <a href="{{ route('register') }}">Register</a><div class="co">&emsp;for a new account</div>
                     @endauth
                 </div>
             @endif
@@ -98,7 +133,7 @@
                 <div class="title m-b-md">
                   LIS 161 CMS
                 </div>
-                Discover. Create. Contribute.
+                  <h3>Create. Discover. Change.</h3>
         </div>
     </body>
 </html>
