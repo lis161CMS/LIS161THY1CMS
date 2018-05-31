@@ -94,7 +94,7 @@ class ContentController extends Controller
      */
     public function edit($id)
     {
-        $content= Content::findOrFail($id);
+        $content= Revision::findOrFail($id);
         return view('contents.edit', compact('content'));
     }
 

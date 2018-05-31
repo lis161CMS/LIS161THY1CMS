@@ -9,18 +9,21 @@
             font-family: 'Roboto', sans-serif;
             font-weight: 300;
         }
-    </style>
+</style>
     <br/><br/>
         {!!Form::model($content, [
             'route' => ['contents.update', $content->id],
             'class' => 'form-horizontal',
             'method'=> 'PUT'
         ])!!}
+        @php
+            $content="tete";
+        @endphp
         <div align="center">
         <div class="form-group">
             <label for="title">Title</label>
             <div class="col-md-6">
-            {!! Form::text('contentTitle',NULL, ['class'=>'form-control'])!!}
+            {!! Form::text('$content',NULL, ['class'=>'form-control'])!!}
             </div>
         </div>
         <div class="form-group">
