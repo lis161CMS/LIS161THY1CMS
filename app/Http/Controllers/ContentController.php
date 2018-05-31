@@ -15,14 +15,16 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class ContentController extends Controller
 {
     use SoftDeletes;
-    /**
-     * Display a listing of the resource.
+    /*
+     ** Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $revisions = Revision::all();
+        //$revisions=Revision::where('content_id', 13)->latest()->first();
+        $revisions = Revision::orderBy('revisionNo','desc')->get();
+        //$revisions = DB::table('revisions')->groupBy('content_id')
         return view('contents.index',compact('revisions'));
     }
 
@@ -44,7 +46,7 @@ class ContentController extends Controller
      */
     public function store(Request $request)
     {
-        $time = Carbon::now()->toDateTimeString();
+        $time = Carbon::now(8)->toDateTimeString();
         $id = \Auth::user()->id;
         $newContent = [
             'contentTitle' => $request->input('contentTitle'),
@@ -107,29 +109,26 @@ class ContentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $time = Carbon::now()->toDateTimeString();
+        $time = Carbon::now(8)->toDateTimeString();
         $uid = \Auth::user()->id;
         $data = [
             'contentTitle'=> $request->input('contentTitle'),
             'updated_at' => $time,
             'user_id' => $uid
         ];
-       // $contentid = DB::table('contents')->insertGetId($data);
         $contentid = DB::table('revisions')->where('id',$id)->value('content_id');
         $findRecord = Content::findOrFail ($contentid);
         $update = $findRecord->update($data);
-        /*
-        $contentid = DB::table('contents')->insertGetId($data);
-        $newrev = DB::table('revisions')->where('content_id',$contentid)->value('revisionNo');
+        $newrev = DB::table('revisions')->where('content_id',$contentid)->latest()->value('revisionNo');
         $newPost = [
             'content' => $request->input('content'),
             'revisionNo' => ++$newrev,
             'content_id' => $contentid,
-            'user_id' => $id,
+            'user_id' => $uid,
             'created_at' => $time,
             'updated_at' => $time
         ];
-        $savePost = DB::table('revisions')->insertGetId($newPost);*/
+        $savePost = DB::table('revisions')->insertGetId($newPost);
         return redirect(route('contents.index'));
     }
 

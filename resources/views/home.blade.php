@@ -13,7 +13,7 @@
                     {{ $rev->content }}
                 </div>
                 <div class="card-body">
-                    <form action="{!!route('contents.edit', [$rev->id])!!}"><input type="submit" value=">" /></form>
+                    <form action="{!!route('contents.edit', [$rev->id])!!}"><input type="submit" value="EDIT" /></form>
                 </div>
             </div><br/><br/>
           @endforeach
