@@ -72,20 +72,11 @@
                 <div class="top-right links">
                     @auth
 <<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 5946d2c58a94825c2ec9b8fcd504470eaf76676a
                         @if(Auth::check() && Auth::user()->role_id == 1)
     	                      <a href="{{ url('/adminhome') }}">Home</a>
                         @else
                             <a href="{{ url('/home') }}">Home</a>
                         @endif
-<<<<<<< HEAD
-=======
-=======
-                        <a href="{{ url('/home') }}">Home</a>
-                        <a href="{{ url('/new') }}">New Post</a>
->>>>>>> f1fbc52fefc72015dab75972c8a054668184711b
 >>>>>>> 5946d2c58a94825c2ec9b8fcd504470eaf76676a
                     @else
                         <a href="{{ route('login') }}">Login</a>
