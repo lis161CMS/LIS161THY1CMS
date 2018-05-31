@@ -33,7 +33,7 @@ class HomeController extends Controller
     }
 
     public function user(Request $req){
-          $revisions = Revision::all();
+          $revisions = Revision::orderBy('revisionNo','desc')->get();
           return view('/home', compact('revisions'));
           ##$contents = Content::all();
           ##return view('/home', compact('contents'));
