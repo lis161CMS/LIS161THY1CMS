@@ -75,7 +75,7 @@
                         @if(Auth::check() && Auth::user()->role_id == 1)
     	                      <a href="{{ url('/adminhome') }}">Home</a>
                         @else
-                            <a class="nav-link" href="{{ url('/newpost/create') }}">{{ __('New Post') }}</a>
+                            <a class="nav-link" href="{{ url('/contents/create') }}">{{ __('New Post') }}</a>
                             <a href="{{ url('/home') }}">Home</a>
                         @endif
 
