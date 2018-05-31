@@ -50,8 +50,13 @@
                                 <li><a class="nav-link" href="{{ url('/permissions') }}">{{ __('Permissions') }}</a></li>
                                 <li><a class="nav-link" href="{{ url('/navigation/create') }}">{{ __('Edit User Navigation') }}</a></li>
                             @else
-                                <li><a class="nav-link" href="{{ url('/home') }}">{{ __('Home') }}</a></li>
-                                <li><a class="nav-link" href="{{ url('/contents/create') }}">{{ __('New Post') }}</a></li>
+                                @php
+                                    $navs = DB::table('navigations')->where('navactivated',1)->get();
+                                @endphp
+
+            										@foreach($navs as $nav)
+                                  {{ link_to_route($nav->navigationLink, $nav->navigationName, null,['class' => 'nav-link']) }}
+            										@endforeach
                             @endif
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
