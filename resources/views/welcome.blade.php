@@ -75,9 +75,8 @@
     	                      <a href="{{ url('/adminhome') }}">Home</a>
                         @else
                             <a href="{{ url('/home') }}">Home</a>
+                            <a href="{{ url('/newpost/create') }}">New Post</a>
                         @endif
-                        <a href="{{ url('/home') }}">Home</a>
-                        <a href="{{ url('/new') }}">New Post</a>
                     @else
                         <a href="{{ route('login') }}">Login</a>
                         <a href="{{ route('register') }}">Register</a>
