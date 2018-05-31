@@ -54,7 +54,7 @@ class ContentController extends Controller
      */
     public function store(Request $request)
     {
-        $time = Carbon::now(8)->toDateTimeString();
+        $time = Carbon::now()->toDateTimeString();
         $id = \Auth::user()->id;
         $newContent = [
             'contentTitle' => $request->input('contentTitle'),
@@ -117,7 +117,7 @@ class ContentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $time = Carbon::now(8)->toDateTimeString();
+        $time = Carbon::now()->toDateTimeString();
         $uid = \Auth::user()->id;
         $data = [
             'contentTitle'=> $request->input('contentTitle'),
@@ -148,6 +148,16 @@ class ContentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $del = Content::findOrFail ($id);
+        if(empty($del)):
+            Session::flash('message','Not found.');
+            Session::flash('status','Not found.');
+            return redirect(route('contents.index'));
+        else:
+            $deleteRecord= $del->delete($id);
+            Session::flash('message','Title deleted.');
+            Session::flash('status','Title deleted.');
+            return redirect(route('contents.index'));
+        endif;
     }
 }
