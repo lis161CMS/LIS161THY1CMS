@@ -103,6 +103,17 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $userRecord = User::findOrFail($id);
+
+        if (empty($userRecord)):
+            Session::flash('message', 'Instance deleted unsuccessfully.');
+            Session::flash('status', 'Instance deleted unsuccessfully.');
+            return redirect(route('users.index'));
+        else:
+            $deleteRecord = $userRecord->delete($id);
+            Session::flash('message', 'Instance deleted successfully.');
+            Session::flash('status', 'Instance deleted successfully.');
+            return redirect(route('users.index'));
+        endif;
     }
 }
