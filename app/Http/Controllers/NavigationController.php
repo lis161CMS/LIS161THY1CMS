@@ -37,7 +37,7 @@ class NavigationController extends Controller
             ->whereIn('id', $request)
             ->update(['navactivated' => TRUE]);
 
-        return redirect(route('navtype.create'));
+        return redirect(route('navigation.create'));
     }
 
     /**

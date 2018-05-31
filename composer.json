@@ -20,9 +20,6 @@
         "xethron/migrations-generator": "^2.0"
     },
     "autoload": {
-        "files": [
-            "app/helpers.php"
-        ],
         "classmap": [
             "database/seeds",
             "database/factories"
