@@ -18,7 +18,6 @@
         ])!!}
         @php
             $user = DB::table('contents')->where('id',$content->content_id)->value('contentTitle');
-            echo $user;
         @endphp
         <div align="center">
         <div class="form-group">
@@ -36,7 +35,7 @@
             </div>
         </div>
         <div class="form-group">
-            <input type="submit"  name="submit" value="save">
+            <input type="submit"  name="submit" value="Update">
         </div></div>
         {!! Form::close() !!}
 @endsection

@@ -22,9 +22,7 @@ class ContentController extends Controller
      */
     public function index()
     {
-        //$revisions=Revision::where('content_id', 13)->latest()->first();
         $revisions = Revision::orderBy('revisionNo','desc')->get();
-        //$revisions = DB::table('revisions')->groupBy('content_id')
         return view('contents.index',compact('revisions'));
     }
 
