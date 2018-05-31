@@ -33,6 +33,7 @@ Route::group([ 'middleware' => ['auth', 'user']], function()
 {
   Route::get('home', 'HomeController@user')->name('home.user');
   Route::resource('contents', 'ContentController');
+    Route::get('usercontent', 'ContentController@user')->name('content.user');
 });
 
 
