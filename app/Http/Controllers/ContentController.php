@@ -26,6 +26,16 @@ class ContentController extends Controller
         return view('contents.index',compact('revisions'));
     }
 
+    public function user()
+    {
+
+        $id = \Auth::user()->id;
+        //$revisions=Revision::where('content_id', 13)->latest()->first();
+        $revisions = Revision::where('user_id',$id)->orderBy('revisionNo','desc')->get();
+        //$revisions = DB::table('revisions')->groupBy('content_id')
+        return view('contents.index',compact('revisions'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
