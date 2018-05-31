@@ -50,7 +50,7 @@
                                 <li><a class="nav-link" href="{{ url('/navigation/create') }}">{{ __('Edit User Navigation') }}</a></li>
                             @else
                                 <li><a class="nav-link" href="{{ url('/home') }}">{{ __('Home') }}</a></li>
-                                <li><a class="nav-link" href="{{ url('/newpost/create') }}">{{ __('New Post') }}</a></li>
+                                <li><a class="nav-link" href="{{ url('/contents/create') }}">{{ __('New Post') }}</a></li>
                             @endif
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

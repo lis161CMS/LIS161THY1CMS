@@ -36,7 +36,7 @@ class ContenttypeController extends Controller
      */
     public function store(Request $request)
     {
-         $contenttypes = new Contenttype;
+        $contenttypes = new Contenttype;
         $contenttypes->title = request('contentType');
         $contenttypes->author = request('contentTypeDesc');
         $contenttypes->save();

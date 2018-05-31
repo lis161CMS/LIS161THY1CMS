@@ -10,9 +10,11 @@ use Session;
 use Illuminate\Database\Eloquent;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ContentController extends Controller
 {
+    use SoftDeletes;
     /**
      * Display a listing of the resource.
      *
@@ -21,7 +23,7 @@ class ContentController extends Controller
     public function index()
     {
         $content = Content::all();
-        return view('contents.index',compact('content'));
+        return view('content.index',compact('content'));
     }
 
     /**
@@ -31,7 +33,7 @@ class ContentController extends Controller
      */
     public function create()
     {
-        return view('content.create');
+        return view('contents.create');
     }
 
     /**
@@ -92,7 +94,8 @@ class ContentController extends Controller
      */
     public function edit($id)
     {
-        //
+        $content= Content::findOrFail($id);
+        return view('contents.edit', compact('content'));
     }
 
     /**
@@ -104,7 +107,28 @@ class ContentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $time = Carbon::now()->toDateTimeString();
+        $id = \Auth::user()->id;
+        $data = [
+            'contentTitle'=> $request->input('contentTitle'),
+            'updated_at' => $time,
+            'user_id' => $id
+        ];
+        
+        $findRecord = Content::findOrFail ($id);
+        $update = $findRecord->update($data);
+        /*
+        $contentid = DB::table('contents')->insertGetId($data);
+        $newrev = DB::table('revisions')->where('content_id',$contentid)->value('revisionNo');
+        $newPost = [
+            'content' => $request->input('content'),
+            'revisionNo' => ++$newrev,
+            'content_id' => $contentid,
+            'user_id' => $id,
+            'created_at' => $time,
+            'updated_at' => $time
+        ];
+        $savePost = DB::table('revisions')->insertGetId($newPost);*/
     }
 
     /**
