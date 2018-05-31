@@ -18,14 +18,14 @@ Route::get('/', function () {
 Auth::routes();
 
 ##Route::get('/home', 'HomeController@index')->name('home');
+Route::post('navigation.navupdate', 'NavigationController@navupdate');
+Route::resource('navtype', 'NavTypeController');
 
 Route::group([ 'middleware' => ['auth', 'admin']], function()
 {
   Route::get('adminhome', 'HomeController@admin');
   Route::resource('users', 'UserController');
   Route::resource('permissions', 'PermissionController');
-  Route::resource('navtype', 'NavTypeController');
-  Route::post('navigation.navupdate', 'NavigationController@navupdate');
   Route::resource('navigation','NavigationController');
 });
 
