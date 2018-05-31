@@ -29,7 +29,8 @@ class HomeController extends Controller
     }
 
     public function admin(Request $req){
-    	 return view('/adminhome');
+          $revisions = Revision::orderBy('revisionNo','desc')->get();
+    	    return view('/adminhome', compact('revisions'));
     }
 
     public function user(Request $req){

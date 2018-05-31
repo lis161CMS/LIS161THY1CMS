@@ -12,18 +12,16 @@ use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class ContentController extends Controller
+class AdmincontentController extends Controller
 {
-    use SoftDeletes;
-    /*
-     ** Display a listing of the resource.
+    /**
+     * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $revisions = Revision::orderBy('revisionNo','desc')->get();
-        return view('home.user',compact('revisions'));
+        //
     }
 
     public function user()
@@ -32,8 +30,8 @@ class ContentController extends Controller
         $id = \Auth::user()->id;
         //$revisions=Revision::where('content_id', 13)->latest()->first();
         $revisions = Revision::where('user_id',$id)->orderBy('revisionNo','desc')->get();
-        //$revisions = DB::table('revisions')->groupBy('content_id')
-        return view('home.user',compact('revisions'));
+        //$revisions = DB::table('revisions')->groupBy('content_id') 
+        return view('home.admin',compact('revisions'));
     }
 
     /**
@@ -43,7 +41,7 @@ class ContentController extends Controller
      */
     public function create()
     {
-        return view('contents.create');
+        return view('admincontents.create');
     }
 
     /**
@@ -79,7 +77,7 @@ class ContentController extends Controller
         $savePost = DB::table('revisions')->insertGetId($newPost);
 
         if($savePost):
-            return redirect('/home');
+            return redirect('/adminhome');
         else:
             return redirect()->back()->withInput();
         endif;
@@ -105,7 +103,7 @@ class ContentController extends Controller
     public function edit($id)
     {
         $content= Revision::findOrFail($id);
-        return view('contents.edit', compact('content'));
+        return view('admincontents.edit', compact('content'));
     }
 
     /**
@@ -137,7 +135,7 @@ class ContentController extends Controller
             'updated_at' => $time
         ];
         $savePost = DB::table('revisions')->insertGetId($newPost);
-        return redirect(route('home.user'));
+        return redirect(route('home.admin'));
     }
 
     /**
@@ -152,12 +150,12 @@ class ContentController extends Controller
         if(empty($del)):
             Session::flash('message','Not found.');
             Session::flash('status','Not found.');
-            return redirect(route('home.user'));
+            return redirect(route('contents.index'));
         else:
             $deleteRecord= $del->delete($id);
             Session::flash('message','Post deleted.');
             Session::flash('status','Post deleted.');
-            return redirect(route('home.user'));
+            return redirect(route('home.admin'));
         endif;
     }
 }

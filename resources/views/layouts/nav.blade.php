@@ -45,7 +45,8 @@
                             <li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>
                         @else
                             @if(Auth::check() && Auth::user()->role_id == 1)
-                                <li><a class="nav-link" href="{{ url('/adminhome') }}">{{ __('Home') }}</a></li>
+                                <li><a class="nav-link" href="{{ url('/adminhome') }}">{{ __('View Content') }}</a></li>
+                                <li><a class="nav-link" href="{{ url('/admincontent/create') }}">{{ __('Add Content') }}</a></li>
                                 <li><a class="nav-link" href="{{ url('/users') }}">{{ __('User Management') }}</a></li>
                                 <li><a class="nav-link" href="{{ url('/permissions') }}">{{ __('Permissions') }}</a></li>
                                 <li><a class="nav-link" href="{{ url('/navigation/create') }}">{{ __('Edit User Navigation') }}</a></li>

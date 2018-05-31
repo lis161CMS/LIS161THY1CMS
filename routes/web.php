@@ -23,10 +23,12 @@ Route::resource('navtype', 'NavTypeController');
 
 Route::group([ 'middleware' => ['auth', 'admin']], function()
 {
-  Route::get('adminhome', 'HomeController@admin');
+  Route::get('adminhome', 'HomeController@admin')->name('home.admin');
   Route::resource('users', 'UserController');
   Route::resource('permissions', 'PermissionController');
   Route::resource('navigation','NavigationController');
+  Route::resource('admincontent', 'AdmincontentController');
+  Route::get('owncontent', 'AdmincontentController@user')->name('content.admin');
 });
 
 Route::group([ 'middleware' => ['auth', 'user']], function()

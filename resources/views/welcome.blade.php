@@ -73,10 +73,11 @@
                     @auth
 
                         @if(Auth::check() && Auth::user()->role_id == 1)
+                            <a href="{{ url('/adminhome') }}">View Content</a>
+                            <a href="{{ url('/admincontent/create') }}">Add Content</a>
                             <a href="{{ url('/users') }}">{{ __('User Management') }}</a>
                             <a href="{{ url('/permissions') }}">{{ __('Permissions') }}</a>
                             <a href="{{ url('/navigation/create') }}">{{ __('Edit User Navigation') }}</a>
-        	                      <a href="{{ url('/adminhome') }}">Home</a>
                         @else
                             @php
                                 $navs = DB::table('navigations')->where('navactivated',1)->get();
