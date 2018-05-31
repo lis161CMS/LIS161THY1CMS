@@ -23,6 +23,7 @@ Route::group([ 'middleware' => ['auth', 'admin']], function()
 {
 	Route::get('adminhome', 'HomeController@admin');
   Route::resource('users', 'UserController');
+  Route::resource('permissions', 'PermissionController');
   Route::resource('navtype', 'NavTypeController');
   Route::post('navigation.navupdate', 'NavigationController@navupdate');
   Route::resource('navigation','NavigationController');
