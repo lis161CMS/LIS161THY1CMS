@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 30, 2018 at 03:19 PM
+-- Generation Time: May 31, 2018 at 04:39 PM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.2
 
@@ -38,6 +38,16 @@ CREATE TABLE `contents` (
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `contents`
+--
+
+INSERT INTO `contents` (`id`, `contentTitle`, `created_at`, `updated_at`, `deleted_at`, `contentType_id`, `user_id`) VALUES
+(1, 'Title', NULL, NULL, NULL, 1, 9),
+(4, 'Title Post', '2018-05-30 07:04:08', '2018-05-30 07:04:08', NULL, 1, 9),
+(5, 'Content Title', '2018-05-31 13:16:29', '2018-05-31 13:16:29', NULL, 1, 9),
+(6, 'Title 2', '2018-05-31 13:34:53', '2018-05-31 13:34:53', NULL, 1, 10);
+
 -- --------------------------------------------------------
 
 --
@@ -53,6 +63,13 @@ CREATE TABLE `contenttypes` (
   `deleted_at` timestamp NULL DEFAULT NULL,
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `contenttypes`
+--
+
+INSERT INTO `contenttypes` (`id`, `contentType`, `contentTypeDesc`, `created_at`, `updated_at`, `deleted_at`, `user_id`) VALUES
+(1, 'Text Post', 'Plain text post.', '2018-05-29 16:00:00', '2018-05-29 16:00:00', '2018-05-29 16:00:00', 4);
 
 -- --------------------------------------------------------
 
@@ -128,9 +145,9 @@ CREATE TABLE `navigations` (
 --
 
 INSERT INTO `navigations` (`id`, `navigationName`, `navigationLink`, `navactivated`, `created_at`, `updated_at`, `deleted_at`, `role_id`, `navigationType_id`, `user_id`) VALUES
-(1, 'View Content', 'viewcontent', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 2, 1, 0),
-(2, 'Add Content', 'addcontent', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 2, 1, 0),
-(3, 'View Own Content', 'usercontent', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 2, 1, 0),
+(1, 'View Content', 'home.user', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 2, 1, 0),
+(2, 'Add Content', 'contents.create', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 2, 1, 0),
+(3, 'View Own Content', 'content.user', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 2, 1, 0),
 (4, 'name4', 'link4', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 2, 1, 2),
 (5, 'name5', 'link5', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 2, 1, 2),
 (6, 'name6', 'link6', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 2, 1, 2),
@@ -190,6 +207,17 @@ CREATE TABLE `revisions` (
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `revisions`
+--
+
+INSERT INTO `revisions` (`id`, `content`, `revisionNo`, `created_at`, `updated_at`, `deleted_at`, `created_at_copy1`, `updated_at_copy1`, `deleted_at_copy1`, `imageLink`, `content_id`, `user_id`) VALUES
+(1, 'Content', '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 9),
+(2, 'Content Post. Will I finish in time?', '1', '2018-05-30 07:04:08', '2018-05-30 07:04:08', NULL, NULL, NULL, NULL, NULL, 4, 9),
+(3, 'It works', '1', '2018-05-31 13:16:29', '2018-05-31 13:16:29', NULL, NULL, NULL, NULL, NULL, 5, 9),
+(4, 'It really works', '2', '2018-05-31 13:16:44', '2018-05-31 13:16:44', NULL, NULL, NULL, NULL, NULL, 5, 9),
+(5, 'This is user 2.', '1', '2018-05-31 13:34:53', '2018-05-31 13:34:53', NULL, NULL, NULL, NULL, NULL, 6, 10);
+
 -- --------------------------------------------------------
 
 --
@@ -240,11 +268,13 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `firstName`, `middleName`, `lastName`, `email`, `password`, `created_at`, `updated_at`, `deleted_at`, `role_id`, `userPhoto`, `remember_token`) VALUES
 (3, 'Ma. Nicole', 'Reduta', 'Tacuboy', 'tma.nicole@gmail.com', '$2y$10$9OyvCJhpdrFJwW/iM5RbGec0ZLWGNI.Gyw7OBvhVqbtuu0JEmTcG6', '2018-05-24 20:08:18', '2018-05-24 20:08:18', NULL, 1, NULL, NULL),
-(4, 'Jeanne Denyse', 'Viudez', 'Torres', 'jvtorres2@up.edu.ph', '$2y$10$Cl6kglTiwh8d2j9wxpRh4ehCW8bktVO4qRn7oTPhuBvcwvctGR9LO', '2018-05-24 23:31:24', '2018-05-24 23:31:24', NULL, 1, NULL, '2GziP7foaTnOf3oMwHvvbNPj3oQpuiGHFoMw737OftnRDMUQgFJ53V2Ooefs'),
+(4, 'Jeanne Denyse', 'Viudez', 'Torres', 'jvtorres2@up.edu.ph', '$2y$10$Cl6kglTiwh8d2j9wxpRh4ehCW8bktVO4qRn7oTPhuBvcwvctGR9LO', '2018-05-24 23:31:24', '2018-05-24 23:31:24', NULL, 1, NULL, 'G85wpdLOkHuSuvS2V0ZUJbRB7nvVxSTPIVSsRwo1TaXw6SqRBfOBxYnSvcYL'),
 (5, 'Winston', 'Sison', 'Isaac', 'marc@winstonisaac.com', '$2y$10$JV49qRP2imgpdBEeM1NLR.YW2ktKSDc/W.N0IE.btJUnlXhLk23hS', '2018-05-25 10:52:34', '2018-05-25 10:52:34', NULL, 1, NULL, 'llhLcgMjDmSJ96tukBmXT15OQIs4NwllZ7spPD0Im3OZXJtqNmlseeloqHvA'),
 (6, 'First', 'Middle', 'Last', 'email@email.com', '$2y$10$IJGwLghot/YigNBm1/MvfOWOPW1x5kJVGFwaet0j.8BgaIvOY9JEK', '2018-05-30 03:58:56', '2018-05-30 03:58:56', NULL, 1, NULL, 'ViBXBMscu71dRLubLJ0wKWZRNvynr83Y9Q9DbzQUWyytd3CAIwH63E5WQvxq'),
 (7, 'User', 'Middle', 'Last', 'email2@email.com', '$2y$10$0o3jMRckrhhrw1d9M9GP2.Z9ISPwVhfXeBSxR6/vFQ6lHQOCjkoQ6', '2018-05-30 04:30:55', '2018-05-30 04:30:55', NULL, 2, NULL, 'dOYNCpCWhKFnbytNEGdm044cXzl5mIrVFvWOkoYNSFGjkVtsdlRYska1ZvFk'),
-(8, 'Admin', 'Middle', 'Last', 'admin@email.com', '$2y$10$.B1VEDwcwr7N6xCcVSdaa.FxCfuU3AHsFW5GDLoA.6i6sTnF3vspu', '2018-05-30 04:38:04', '2018-05-30 04:38:04', NULL, 1, NULL, NULL);
+(8, 'Admin', 'Middle', 'Last', 'admin@email.com', '$2y$10$.B1VEDwcwr7N6xCcVSdaa.FxCfuU3AHsFW5GDLoA.6i6sTnF3vspu', '2018-05-30 04:38:04', '2018-05-30 04:38:04', NULL, 1, NULL, 'Xw9NMsn0mRQoUXrxJTPd7vmN9AaegD1cLsG0QkhTcI1h0Z2RbLrN52csb3L8'),
+(9, 'User', 'Middle', 'Last', 'user@email.com', '$2y$10$A/6eSd324ltIE.Ptf7XGE.8SxizfLHUm3fh15lR..8D9b4b84qx/e', '2018-05-30 05:43:21', '2018-05-30 05:43:21', NULL, 2, NULL, 'XdM2CQzEyXlisGB9FtqJ2KFI5F0QdWba8Ukodhu6NkWKhLUfb3OdUhwXmEqb'),
+(10, 'User 2', 'Middle', 'Last', 'user2@email.com', '$2y$10$t09KsmDQCL2jBiCWidZqcuCnZMAwqHV9pfbR.a1d.d8pvdWmuRak2', '2018-05-31 06:34:02', '2018-05-31 06:34:02', NULL, 2, NULL, '0jrNhGivf1PesUSOCMzRFizGciTH7byT8qPx1K4pbcWKDmX7CRATdPmfQp9u');
 
 --
 -- Indexes for dumped tables
@@ -331,13 +361,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `contents`
 --
 ALTER TABLE `contents`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `contenttypes`
 --
 ALTER TABLE `contenttypes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -373,7 +403,7 @@ ALTER TABLE `permissions`
 -- AUTO_INCREMENT for table `revisions`
 --
 ALTER TABLE `revisions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -385,7 +415,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Constraints for dumped tables
