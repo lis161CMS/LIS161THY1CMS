@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\Contenttype;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -74,8 +75,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-
-        return User::create([
+        $user=User::create([
             'firstName' => $data['firstName'],
             'middleName' => $data['middleName'],
             'lastName' => $data['lastName'],
@@ -83,5 +83,13 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+        $uid=User::max('id');
+        $contentType=[
+            'contentType'=>1,
+            'contentTypeDesc'=>"text",
+            'user_id'=>$uid
+        ];
+        $saveCType = Contenttype::create($contentType);
+        return $user;
     }
 }
