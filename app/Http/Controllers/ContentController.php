@@ -155,8 +155,8 @@ class ContentController extends Controller
             return redirect(route('contents.index'));
         else:
             $deleteRecord= $del->delete($id);
-            Session::flash('message','Title deleted.');
-            Session::flash('status','Title deleted.');
+            Session::flash('message','Post deleted.');
+            Session::flash('status','Post deleted.');
             return redirect(route('contents.index'));
         endif;
     }
