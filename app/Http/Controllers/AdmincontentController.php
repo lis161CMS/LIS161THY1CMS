@@ -30,8 +30,8 @@ class AdmincontentController extends Controller
         $id = \Auth::user()->id;
         //$revisions=Revision::where('content_id', 13)->latest()->first();
         $revisions = Revision::where('user_id',$id)->orderBy('revisionNo','desc')->get();
-        //$revisions = DB::table('revisions')->groupBy('content_id') 
-        return view('home.admin',compact('revisions'));
+        //$revisions = DB::table('revisions')->groupBy('content_id')
+        return view('adminhome',compact('revisions'));
     }
 
     /**

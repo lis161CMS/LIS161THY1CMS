@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Carbon\Carbon;
 
 class RolesTableSeeder extends Seeder
 {
@@ -12,19 +13,23 @@ class RolesTableSeeder extends Seeder
     public function run()
     {
         \DB::table('roles')->delete();
-        
+
         \DB::table('roles')->insert(array (
-            0 => 
+            0 =>
             array (
                 'id' => '1',
-                'role' => 'User',
-                'roleShortName' => 'User',
+                'role' => 'Administrator',
+                'roleShortName' => 'admin',
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ),
-            1 => 
+            1 =>
             array (
                 'id' => '2',
-                'role' => 'Administrator',
-                'roleShortName' => 'Admin',
+                'role' => 'User',
+                'roleShortName' => 'user',
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ),
         ));
 

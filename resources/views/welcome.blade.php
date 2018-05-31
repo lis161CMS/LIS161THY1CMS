@@ -75,6 +75,7 @@
                         @if(Auth::check() && Auth::user()->role_id == 1)
                             <a href="{{ url('/adminhome') }}">View Content</a>
                             <a href="{{ url('/admincontent/create') }}">Add Content</a>
+                                <a href="{{ url('/owncontent') }}">View Own Content</a>
                             <a href="{{ url('/users') }}">{{ __('User Management') }}</a>
                             <a href="{{ url('/permissions') }}">{{ __('Permissions') }}</a>
                             <a href="{{ url('/navigation/create') }}">{{ __('Edit User Navigation') }}</a>
