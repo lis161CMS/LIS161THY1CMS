@@ -43,7 +43,7 @@
           <div class="row">
             <div class="col-md-4"></div>
               <div class="form-group col-md-4">
-                <label for="email">Set Role (1 = User, 2 = Admin)</label>
+                <label for="email">Set Role (1 = Admin, 2 = User)</label>
                 <input type="text" class="form-control" name="role_id" value="{{$users->role_id}}">
               </div>
             </div>
