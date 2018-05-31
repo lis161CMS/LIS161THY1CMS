@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Navigationtype;
+use Illuminate\Support\Facades\DB;
 
 class NavTypeController extends Controller
 {
@@ -37,14 +38,20 @@ class NavTypeController extends Controller
     {
         $this->validate($request,
             ['navigationType' => 'required',
-            'user' => 'required'
         ]);
+        $name = $request->get('name');
+        $user = DB::table('users')->where('firstName', $name)->value('id');
+        if($user == NULL){
+            return redirect('navtype')
+            ->withErrors($user)
+            ->withInput();
+        }
         $navtype = new navigationType([
             'navigationType' => $request->get('navigationType'),
-            'user_id' => $request->get('user')
+            'user_id' => $user
         ]);
         $navtype->save();
-        return redirect()->route('navtype.create')->with('success');
+        return redirect()->route('navigation.create')->with('success');
     }
 
     /**
