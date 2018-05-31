@@ -21,7 +21,7 @@ Auth::routes();
 
 Route::group([ 'middleware' => ['auth', 'admin']], function()
 {
-	Route::get('adminhome', 'HomeController@admin');
+  Route::get('adminhome', 'HomeController@admin');
   Route::resource('users', 'UserController');
   Route::resource('permissions', 'PermissionController');
   Route::resource('navtype', 'NavTypeController');
@@ -31,7 +31,7 @@ Route::group([ 'middleware' => ['auth', 'admin']], function()
 
 Route::group([ 'middleware' => ['auth', 'user']], function()
 {
-	Route::get('home', 'HomeController@user');
+  Route::get('home', 'HomeController@user');
   Route::resource('contents', 'ContentController');
 });
 

@@ -22,8 +22,8 @@ class ContentController extends Controller
      */
     public function index()
     {
-        $content = Content::all();
-        return view('content.index',compact('content'));
+        $revisions = Revision::all();
+        return view('contents.index',compact('revisions'));
     }
 
     /**
@@ -108,14 +108,15 @@ class ContentController extends Controller
     public function update(Request $request, $id)
     {
         $time = Carbon::now()->toDateTimeString();
-        $id = \Auth::user()->id;
+        $uid = \Auth::user()->id;
         $data = [
             'contentTitle'=> $request->input('contentTitle'),
             'updated_at' => $time,
-            'user_id' => $id
+            'user_id' => $uid
         ];
-        
-        $findRecord = Content::findOrFail ($id);
+       // $contentid = DB::table('contents')->insertGetId($data);
+        $contentid = DB::table('revisions')->where('id',$id)->value('content_id');
+        $findRecord = Content::findOrFail ($contentid);
         $update = $findRecord->update($data);
         /*
         $contentid = DB::table('contents')->insertGetId($data);
@@ -129,6 +130,7 @@ class ContentController extends Controller
             'updated_at' => $time
         ];
         $savePost = DB::table('revisions')->insertGetId($newPost);*/
+        return redirect(route('contents.index'));
     }
 
     /**
