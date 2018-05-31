@@ -73,10 +73,18 @@
                     @auth
 
                         @if(Auth::check() && Auth::user()->role_id == 1)
-    	                      <a href="{{ url('/adminhome') }}">Home</a>
+                            <a href="{{ url('/users') }}">{{ __('User Management') }}</a>
+                            <a href="{{ url('/permissions') }}">{{ __('Permissions') }}</a>
+                            <a href="{{ url('/navigation/create') }}">{{ __('Edit User Navigation') }}</a>
+        	                      <a href="{{ url('/adminhome') }}">Home</a>
                         @else
-                            <a class="nav-link" href="{{ url('/contents/create') }}">{{ __('New Post') }}</a>
-                            <a href="{{ url('/home') }}">Home</a>
+                            @php
+                                $navs = DB::table('navigations')->where('navactivated',1)->get();
+                            @endphp
+
+                            @foreach($navs as $nav)
+                              {{ link_to_route($nav->navigationLink, $nav->navigationName, null,['class' => 'nav-link']) }}
+                            @endforeach
                         @endif
 
                     @else
