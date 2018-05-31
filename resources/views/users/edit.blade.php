@@ -8,7 +8,7 @@
   </head>
   <body>
     <div class="container">
-      <h2>Edit A Form</h2><br  />
+      <h2>Manage User</h2><br  />
         <form method="post" action="{{action('UserController@update', $users->id)}}">
         @csrf
         <input name="_method" type="hidden" value="PATCH">
