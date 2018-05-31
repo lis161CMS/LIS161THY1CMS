@@ -49,6 +49,7 @@
 
             .content {
                 text-align: center;
+                padding-left: 200px;
             }
 
             .title {

@@ -25,6 +25,15 @@
             height: 100%;
             width: auto;
         }
+        html,main {
+            height: 100vh;
+            margin: 0;
+            background-image: url('https://farm5.static.flickr.com/4023/4412224015_dbe31a4ae4_b.jpg');
+            background-repeat: no-repeat;
+            background-position: 60% 50%;
+            background-size: cover;
+          }
+
     </style>
 </head>
 <body>
