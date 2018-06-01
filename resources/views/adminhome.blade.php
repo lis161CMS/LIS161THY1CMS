@@ -1,7 +1,8 @@
 @extends('layouts.nav')
 
 @section('content')
-<div class="container">
+<main>
+  <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
         <?php $test=NULL;?>
@@ -29,4 +30,5 @@
         </div>
     </div>
 </div>
+</main>
 @endsection

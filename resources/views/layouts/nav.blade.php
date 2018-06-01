@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>LIS 161 CMS</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -19,6 +19,17 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <style>
+    html, main {
+        height: 100vh;
+        margin: 0;
+        background-image: url('https://farm5.static.flickr.com/4023/4412224015_dbe31a4ae4_b.jpg');
+        background-repeat: no-repeat;
+        background-position: 60% 50%;
+        background-size: cover;
+      }
+
+    </style>
 </head>
 <body>
     <div id="app">
