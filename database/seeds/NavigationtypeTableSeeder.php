@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 use Carbon\Carbon;
 
-class ContenttypeTableSeeder extends Seeder
+class NavigationtypeTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,9 +12,8 @@ class ContenttypeTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('contenttypes')->insert([
-            'contentType' => 'Text',
-            'contentTypeDesc' => 'Text Post',
+        DB::table('navigationtypes')->insert([
+            'navigationType' => 'Topbar',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'user_id' => 1,
