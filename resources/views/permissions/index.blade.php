@@ -20,7 +20,7 @@
                 @endphp
                 @foreach($permission as $p)
                         @foreach($navs as $nav)
-                        @if($p->role_id == 1 && (($p->id == 4)||($p->id == 5)||($p->id == 6)||($p->id == 7)||($p->id == 8)||($p->id == 9)))
+                        @if($p->role_id == 1 && (($p->id == $nav->id + 3)||($p->id == $nav->id + 6)))
                             <tr>
                                 <td>{{ $p->permission }}</td>
                                 <td>{{ $p->created_at->format('F d, Y h:ia') }}</td>
